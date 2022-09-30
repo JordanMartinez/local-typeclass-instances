@@ -2,6 +2,7 @@
 , dependencies =
   [ "console"
   , "effect"
+  , "identity"
   , "maybe"
   , "newtype"
   , "prelude"
