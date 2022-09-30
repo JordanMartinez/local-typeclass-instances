@@ -156,7 +156,7 @@ instance
 
 main :: Effect Unit
 main = do
-  log "\n\nStep 3:\n"
+  log "\n\nStep 4:\n"
   demonstrateNoOverrides
   demonstrateKind0
   demonstrateKind1
