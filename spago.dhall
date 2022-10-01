@@ -1,6 +1,7 @@
 { name = "my-project"
 , dependencies =
-  [ "console"
+  [ "arrays"
+  , "console"
   , "effect"
   , "identity"
   , "maybe"

@@ -3,12 +3,12 @@ module Complex where
 import Prelude
 
 import Control.Monad.Reader (ReaderT(..), ask, local, runReader, runReaderT)
+import Data.Array as Array
 import Data.Identity (Identity(..))
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
-import Data.Tuple.Nested (Tuple6)
 import Effect (Effect)
 import Effect.Console (log)
 import Prim.Row as Row
@@ -214,3 +214,28 @@ tryMoreComplexExample = do
   log $ show $ dropExternRef $ runReader delegate base
 
 type MaybeX a = Kind1 "maybe" (Maybe a)
+
+data Tuple6 a b c d e f = Tuple6 a b c d e f
+
+instance
+  ( Delegate newtypedRecord a
+  , Delegate newtypedRecord b
+  , Delegate newtypedRecord c
+  , Delegate newtypedRecord d
+  , Delegate newtypedRecord e
+  , Delegate newtypedRecord f
+  ) =>
+  Delegate newtypedRecord (Tuple6 a b c d e f) where
+  delegate = Tuple6 <$> delegate <*> delegate <*> delegate <*> delegate <*> delegate <*> delegate
+
+instance
+  ( Show a
+  , Show b
+  , Show c
+  , Show d
+  , Show e
+  , Show f
+  ) =>
+  Show (Tuple6 a b c d e f) where
+  show (Tuple6 a b c d e f) =
+    "Tuple6(\n  " <> (Array.intercalate "\n  " [ show a, show b, show c, show d, show e, show f ]) <> "\n)"
